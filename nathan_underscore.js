@@ -6,12 +6,12 @@ var _ = {
       return [];
     }
     if(n !== undefined) {
-      var elementsUpTo_n = [];
+      var elementsUpToN = [];
       // n = n-1;
       for(var i = 0; i < n; i++) {
-        elementsUpTo_n.push(array[i]);
+        elementsUpToN.push(array[i]);
       }
-      return elementsUpTo_n;
+      return elementsUpToN;
     } else {  
         return array[0];
     }
@@ -22,15 +22,13 @@ var _ = {
       if(n >= array.length) {
         return [];
       } else {
-        var elementsMinus_n = array.slice(0, array.length-n);
-        return elementsMinus_n;
+        return array.slice(0, array.length-n);
       }
     } else {
-      array.pop();
-      return array;
+      return array.slice(0,1);
     }
   },
-
+  
   last : function(array, n) {
     if(n !== undefined) {
       try {
@@ -88,7 +86,7 @@ var _ = {
   	};
   	for(var i = 0; i < array.length; i++) {
   		if(array[i] !== false) {
-  			
+
   		}
   	}
   }
