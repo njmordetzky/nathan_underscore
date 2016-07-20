@@ -74,22 +74,43 @@ var _ = {
   },
 
   compact : function(array) {
-  	var noFalsyElements = [];
-  	var false = {
-  		key: false,
-  		key: null,
-  		key: undefined,
-  		key: 0,
-  		key: NaA,
-  		key: '',
-  		key: "",
-  	};
-  	for(var i = 0; i < array.length; i++) {
-  		if(array[i] !== false) {
+    var noFalsyElements = [];
+    for(var i = 0; i < array.length; i++) {
+      if(array[i]) {
+        noFalsyElements.push(array[i]);
+      }
+    }
+    return noFalsyElements;
+  },
 
-  		}
-  	}
+  flatten : function(array, shallow) {
+    var shallow = shallow;
+    var flatArray = [];
+    for(var i = 0; i < array.length; i++) {
+      if(Array.isArray(array[i])){
+        if(shallow == "shallow"){
+          var nestedArray = array[i];
+          for(var j = 0; j < nestedArray.length; j++) {
+            if(!Array.isArray(array[i][j])){
+              flatArray.push(array[i][j]);
+            }
+          }  
+        } 
+        else {
+          flatArray = flatArray.concat(_.flatten(array[i]));
+        }  
+      } 
+      else {
+        flatArray.push(array[i]);
+      }
+    }
+    return flatArray;
   }
+
+
+
+
+
 
 
 
@@ -103,45 +124,67 @@ var _ = {
 
 // TEST FUNCTION CALLS 
 
-//_.first
-x = _.first([58, 4567, 300000, 4, 5, 7, 78, 2, 1], 3);
-console.log(x);
 
-x = _.first([58, 4567, 300000, 4, 5, 7, 78, 2, 1], 12);
-console.log(x);
+// _.flatten
+// x = _.flatten([2,3,[4,5],6]);
+// console.log(x);
 
-y = _.first([58, 4567, 300000, 4, 5, 7, 78, 2, 1]);
-console.log(y); 
+// x = _.flatten([2,[[3,[[4,5,[6,7,]],8]]],9]);
+// console.log(x);
 
-// _.initial
-x = _.initial([1, 23, 5, 26, 9, 15, 3]);
-console.log(x);
+// y = _.flatten([2,3,[4,5,[7,8]],6], "shallow");
+// console.log(y);
 
-y = _.initial([1, 23, 5, 26, 9, 15, 3], 7);
-console.log(y);
+// y = _.flatten([2,3,[4,5,[8,9],6],7], "shallow");
+// console.log(y);
 
-y = _.initial([1, 23, 5, 26, 9, 15, 3], 3);
-console.log(y);
 
-// _.last
-x = _.last([2, 4, 35, 6, 409, 2, 75]);
-console.log(x);
+// y = _.flatten([2,[[3,[[4,5,[6,7,]],8]]],9], "shallow");
+// console.log(y);
 
-x = _.last([1,2], 2);
-console.log(x);
-
-y = _.last([2, 4, 35, 6, 409, 2, 75], 8);
-console.log(y);
-
-y = _.last([2, 4, 35, 6, 409, 2, 75], 2);
-console.log(y);
+// _.compact
+// x = _.compact([0, 1, 2, "", 3, -4, false, 5, null, undefined, NaN, 6]);
+// console.log(x);
 
 //_.rest
-x = _.rest([2, 4, 35, 6, 409, 2, 75]);
-console.log(x);
+// x = _.rest([2, 4, 35, 6, 409, 2, 75]);
+// console.log(x);
 
-y = _.rest([2, 4, 35, 6, 409, 2, 75], 7);
-console.log(y);
+// y = _.rest([2, 4, 35, 6, 409, 2, 75], 7);
+// console.log(y);
 
-y = _.rest([2, 4, 35, 6, 409, 2, 75], 2);
-console.log(y);
+// y = _.rest([2, 4, 35, 6, 409, 2, 75], 2);
+// console.log(y);
+
+// _.last
+// x = _.last([2, 4, 35, 6, 409, 2, 75]);
+// console.log(x);
+
+// x = _.last([1,2], 2);
+// console.log(x);
+
+// y = _.last([2, 4, 35, 6, 409, 2, 75], 8);
+// console.log(y);
+
+// y = _.last([2, 4, 35, 6, 409, 2, 75], 2);
+// console.log(y);
+
+// _.initial
+// x = _.initial([1, 23, 5, 26, 9, 15, 3]);
+// console.log(x);
+
+// y = _.initial([1, 23, 5, 26, 9, 15, 3], 7);
+// console.log(y);
+
+// y = _.initial([1, 23, 5, 26, 9, 15, 3], 3);
+// console.log(y);
+
+//_.first
+// x = _.first([58, 4567, 300000, 4, 5, 7, 78, 2, 1], 3);
+// console.log(x);
+
+// x = _.first([58, 4567, 300000, 4, 5, 7, 78, 2, 1], 12);
+// console.log(x);
+
+// y = _.first([58, 4567, 300000, 4, 5, 7, 78, 2, 1]);
+// console.log(y); 
