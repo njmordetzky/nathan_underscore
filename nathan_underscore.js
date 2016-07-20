@@ -105,7 +105,19 @@ var _ = {
       }
     }
     return flatArray;
-  }
+  },
+
+  without : function(array, values) {
+    var array = array.slice();
+    for(var i = array.length-1; i >= 0; i--){ // iterating backwards!!! it took me so long to figure out.
+      for(var j = 1; j < arguments.length; j++) {
+        if(array[i] == arguments[j]){
+          array.splice(i, 1);
+        }
+      }
+    }
+    return array;
+  },
 
 
 
@@ -124,6 +136,19 @@ var _ = {
 
 // TEST FUNCTION CALLS 
 
+
+// _.without
+// x = _.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
+// console.log(x);
+
+// x = _.without([1, 2, 1, 0, 3, 1, 4]);
+// console.log(x);
+
+// x = _.without([1, 2, 1, 0, 3, 1, 4], 0);
+// console.log(x);
+
+// x = _.without([1, 2, 1, 0, 3, 1, 4], 0, 1, 2, 3);
+// console.log(x);
 
 // _.flatten
 // x = _.flatten([2,3,[4,5],6]);
